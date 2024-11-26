@@ -1,6 +1,8 @@
 import random
 Suits = ["♥","♦","♠","♣"]
 Numbers = ['2','3','4','5','6','7','8','9','J','Q','K','A']
+isAce = False
+AddedAce = False
 def hitPlayerHand(cards):
     cards.append(random.choice(Numbers) + random.choice(Suits))   
     return cards
@@ -16,7 +18,6 @@ def getSum(cards):
     handSize = len(cards)
     i = 0
     handSum = 0
-    isAce = False
     while (i < handSize):
         value = cards[i][0]
         if (value == 'J' or value == 'K' or value =='Q'):
@@ -26,7 +27,10 @@ def getSum(cards):
             isAce = True
         handSum += int(value)
         i += 1
-    if (isAce and ((value + 10) <= 21)):
-        return handSum + 10
-    else:
-        return handSum
+    if (isAce and ((int(value) + 10) <= 21)):
+        AddedAce = True
+        handSum += 10
+    if(isAce and AddedAce and (handSum > 21)):
+        handSum -= 10
+        AddedAce = False
+    return handSum

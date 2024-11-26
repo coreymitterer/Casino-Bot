@@ -2,9 +2,9 @@ import time
 import BlackJackMoves
 import Dealer
 def playing():
-    move = "start"
-    status = ""
     while True:
+        move = "start"
+        status = ""
         status = input("Type 'Start' to deal the hand\n")
         if (status.lower() == "start"):
             game_going = True
@@ -53,5 +53,8 @@ def playing():
                         elif(BlackJackMoves.getSum(DealerHand) == BlackJackMoves.getSum(PlayersHand)):
                             print("It is a tie")
                             game_going = False
-                    
+                    else:
+                        print("Dealer busted Player Wins")
+                        game_going = False
+
 playing()
